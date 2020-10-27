@@ -37,9 +37,9 @@ def get_country_data(country):
         print("Reason: ", e.reason)
         return None
     else:
-        data = uh.read().decode()
-        print("Retrieved data on {}. Total of {} characters read.".format(country_name, len(data)))
-        return data
+        read_data = uh.read().decode()
+        print("Retrieved data on {}. Total of {} characters read.".format(country_name, len(read_data)))
+        return read_data
 
 
 # base data to pass to the function example: 'Switzerland'
@@ -69,12 +69,12 @@ try:
         print(lang['name'])
 
 except TypeError as te:
-    print("Nothing was gathered so is JSON object is empty or a NoneType. ERROR:", te)
+    print("Nothing was gathered so the JSON object is empty or a NoneType. ERROR:", te)
 
 print()  # space in console output
 
 
-# wrapper function for pandas dataframe
+# wrapper function for pandas dataframe of multiple countries
 def build_country_db(country_lst):
     """
     Takes in a list of country names.
@@ -87,53 +87,53 @@ def build_country_db(country_lst):
                     'Currencies': [], 'Languages': []}
 
     for c in country_lst:
-        data = get_country_data(c)  # extract data for each country
-        if data is not None:
-            json_data = json.loads(data)
-            one_element = json_data[0]
+        country_data = get_country_data(c)  # extract data for each country
+        if country_data is not None:
+            json_obj_data = json.loads(country_data)
+            one_element_json_obj_data = json_obj_data[0]
             # extract data from json and append to empty lists in the dictionary
-            country_dict['Country'].append(one_element['name'])
-            country_dict['Capital'].append(one_element['capital'])
-            country_dict['Region'].append(one_element['region'])
-            country_dict['Sub-region'].append(one_element['subregion'])
-            country_dict['Population'].append(one_element['population'])
-            country_dict['Latitude'].append(one_element['latlng'][0])
-            country_dict['Longitude'].append(one_element['latlng'][1])
-            country_dict['Area'].append(one_element['area'])
-            country_dict['Gini'].append(one_element['gini'])
+            country_dict['Country'].append(one_element_json_obj_data['name'])
+            country_dict['Capital'].append(one_element_json_obj_data['capital'])
+            country_dict['Region'].append(one_element_json_obj_data['region'])
+            country_dict['Sub-region'].append(one_element_json_obj_data['subregion'])
+            country_dict['Population'].append(one_element_json_obj_data['population'])
+            country_dict['Latitude'].append(one_element_json_obj_data['latlng'][0])
+            country_dict['Longitude'].append(one_element_json_obj_data['latlng'][1])
+            country_dict['Area'].append(one_element_json_obj_data['area'])
+            country_dict['Gini'].append(one_element_json_obj_data['gini'])
 
             # handle possibility of multiple timezones as a list
-            if len(one_element['timezones']) > 1:
-                country_dict['Timezones'].append(','.join(one_element['timezones']))
+            if len(one_element_json_obj_data['timezones']) > 1:
+                country_dict['Timezones'].append(','.join(one_element_json_obj_data['timezones']))
             else:
-                country_dict['Timezones'].append(one_element['timezones'][0])
+                country_dict['Timezones'].append(one_element_json_obj_data['timezones'][0])
 
             # handle possibility of multiple currencies as dictionaries
-            if len(one_element['currencies']) > 1:
+            if len(one_element_json_obj_data['currencies']) > 1:
                 lst_currencies = []
-                for i in one_element['currencies']:
+                for i in one_element_json_obj_data['currencies']:
                     lst_currencies.append(i['name'])
                 country_dict['Currencies'].append(','.join(lst_currencies))
             else:
-                country_dict['Currencies'].append(one_element['currencies'][0]['name'])
+                country_dict['Currencies'].append(one_element_json_obj_data['currencies'][0]['name'])
 
             # handle possibility of multiple languages as dictionaries
-            if len(one_element['languages']) > 1:
+            if len(one_element_json_obj_data['languages']) > 1:
                 lst_languages = []
-                for i in one_element['languages']:
+                for i in one_element_json_obj_data['languages']:
                     lst_languages.append(i['name'])
                 country_dict['Languages'].append(','.join(lst_languages))
             else:
-                country_dict['Languages'].append(one_element['languages'][0]['name'])
+                country_dict['Languages'].append(one_element_json_obj_data['languages'][0]['name'])
 
         # Return as a Pandas dataframe
     return pd.DataFrame(country_dict)
 
 
-# build the list to pass to the build_country_db function with 'Turmeric' being erroneous
+# build the list to pass to the build_country_db function with 'Pixal' being erroneous
 seven_countries_df = build_country_db(['Belgium', 'Switzerland', 'France', 'Pixal', 'Spain', 'Italy', 'Greece'])
 print()  # space in console output
-pd.set_option('display.max_columns', None)
+pd.set_option('display.max_columns', None)  # show all the columns
 print(seven_countries_df)
 
 # TODO: Separate wrapper and build out visual presentation layer using Flask or Django, and sqlite3 or PostgreSQL
