@@ -16,7 +16,7 @@ import json
 import pandas as pd
 
 # base url to append with argument parameter
-serviceurl = 'https://restcountries.eu/rest/v2/name/'
+service_url = 'https://restcountries.eu/rest/v2/name/'
 
 
 def get_country_data(country):
@@ -26,7 +26,7 @@ def get_country_data(country):
     :return: json formatted data on a country.
     """
     country_name = str(country)  # already a string via input but needed if input supplied via other source
-    url = serviceurl + country_name
+    url = service_url + country_name
     try:
         uh = urllib.request.urlopen(url)
     except HTTPError as e:
@@ -136,4 +136,5 @@ print()  # space in console output
 pd.set_option('display.max_columns', None)  # show all the columns
 print(seven_countries_df)
 
+# TODO: Present as search/informational website\
 # TODO: Separate wrapper and build out visual presentation layer using Flask or Django, and sqlite3 or PostgreSQL
