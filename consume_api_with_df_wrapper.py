@@ -135,3 +135,5 @@ seven_countries_df = build_country_db(['Belgium', 'Switzerland', 'France', 'Pixa
 print()  # space in console output
 pd.set_option('display.max_columns', None)
 print(seven_countries_df)
+
+# TODO: Separate wrapper and build out visual presentation layer using Flask or Django, and sqlite3 or PostgreSQL
