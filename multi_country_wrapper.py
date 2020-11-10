@@ -4,8 +4,9 @@ Program: multi_country_wrapper.py
 Created on 11/10/2020
 @author: adhamlin
 
-Change this description to be more relevant.
-This program creates...
+This program passes a list of countries to the api and returns information on those countries.
+This program pulls data from an api endpoint, https://restcountries.eu/
+List all: https://restcountries.eu/rest/v2/all
 """
 # imports
 import urllib.request
