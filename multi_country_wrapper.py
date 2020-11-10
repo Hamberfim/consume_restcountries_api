@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Program: consume_api_with_df_wrapper.py
-Created on 10/27/2020
+Program: multi_country_wrapper.py
+Created on 11/10/2020
 @author: adhamlin
 
-This program pulls data from an api endpoint, https://restcountries.eu/
-List all: https://restcountries.eu/rest/v2/all
+Change this description to be more relevant.
+This program creates...
 """
 # imports
 import urllib.request
@@ -14,6 +14,7 @@ from urllib.error import HTTPError
 from urllib.error import URLError
 import json
 import pandas as pd
+
 
 # base url to append with argument parameter
 service_url = 'https://restcountries.eu/rest/v2/name/'
@@ -40,38 +41,6 @@ def get_country_data(country):
         read_data = uh.read().decode()
         print("Retrieved data on {}. Total of {} characters read.".format(country_name, len(read_data)))
         return read_data
-
-
-# base data to pass to the function example: 'Switzerland'
-country_user_input = input("Enter a country name: ")  # user input of country
-data = get_country_data(country_user_input)
-print()  # space in console output
-
-try:
-    # check json data
-    json_data = json.loads(data)
-    # load one element to check
-    one_element = json_data[0]
-    print("Type:\n", type(one_element))
-    print()  # space in console output
-    # output one_element keys
-    one_element_keys = one_element.keys()
-    print("Single element keys:\n", one_element_keys)
-    print()  # space in console output
-    # one_element = json_data[0] pretty output
-    print("=== Key/Value pairs of the json object ===")
-    for k, v in one_element.items():
-        print(f"{k}: {v}")
-    print()  # space in console output
-    # extract languages spoke in the provided country
-    print("Languages spoken in", country_user_input)
-    for lang in one_element['languages']:
-        print(lang['name'])
-
-except TypeError as te:
-    print("Nothing was gathered so the JSON object is empty or a NoneType. ERROR:", te)
-
-print()  # space in console output
 
 
 # wrapper function for pandas dataframe of multiple countries
@@ -135,6 +104,3 @@ seven_countries_df = build_country_db(['Belgium', 'Switzerland', 'France', 'Pixa
 print()  # space in console output
 pd.set_option('display.max_columns', None)  # show all the columns
 print(seven_countries_df)
-
-# TODO: Present as search/informational website\
-# TODO: Separate wrapper and build out visual presentation layer using Flask or Django, and sqlite3 or PostgreSQL
