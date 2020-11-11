@@ -49,7 +49,7 @@ def get_country_data(country):
 
 
 # country_user_input = input("Enter a country name: ")  # user input of country
-country_user_input = 'italy'  # replace with user input form
+country_user_input = 'italy'  # TODO: replace with user input form
 data = get_country_data(country_user_input)  # as a string
 
 json_obj1 = json.loads(data)  # load data as a list
