@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <title>REST COUNTRIES Results</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+      integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+      crossorigin="anonymous"
+    />
+
+  </head>
+  <body>
+    <div class="container">
+      <h3>REST COUNTRIES</h3>
+      <p>Get information about countries via a RESTful API</p>
+      <table>
+        <tr>
+          <th>Header Title</th>
+          <th>&nbsp;Field Data</th>
+        </tr>
+      {% for key, value in data.items() %}
+        <tr>
+          <td><strong>{{ key }}:</strong></td>
+          <td>&nbsp;&nbsp;&nbsp;{{ value }}</td>
+        </tr>
+      {% endfor %}
+      </table>
+    </div>
+  </body>
+</html>

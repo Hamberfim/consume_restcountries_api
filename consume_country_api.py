@@ -52,12 +52,12 @@ try:
     json_data = json.loads(data)
     # load one element to check
     one_element = json_data[0]
-    print("Type:\n", type(one_element))
-    print()  # space in console output
+    #print("Type:\n", type(one_element))
+    #print()  # space in console output
     # output one_element keys
     one_element_keys = one_element.keys()
-    print("Single element keys:\n", one_element_keys)
-    print()  # space in console output
+    #print("Single element keys:\n", one_element_keys)
+    #print()  # space in console output
     # one_element = json_data[0] pretty output
     print("=== Key/Value pairs of the json object ===")
     for k, v in one_element.items():
@@ -74,4 +74,4 @@ except TypeError as te:
 print()  # space in console output
 
 # TODO: Present as search/informational website\
-# TODO: Separate wrapper and build out visual presentation layer using Flask or Django, and sqlite3 or PostgreSQL
+# TODO: Separate wrapper and build out visual presentation layer using Flask or Django
