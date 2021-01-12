@@ -4,7 +4,7 @@ Program: consume_country_api.py
 Created on 10/27/2020
 @author: adhamlin
 
-This program takes user input of a country and passes it to the api, returns information on those country.
+This program takes user input of a country and passes it to the api, returns information on that country.
 This program pulls data from an api endpoint, https://restcountries.eu/
 List all: https://restcountries.eu/rest/v2/all
 """
