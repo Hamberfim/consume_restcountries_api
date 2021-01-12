@@ -72,6 +72,3 @@ except TypeError as te:
     print("Nothing was gathered so the JSON object is empty or a NoneType. ERROR:", te)
 
 print()  # space in console output
-
-# TODO: Present as search/informational website\
-# TODO: Separate wrapper and build out visual presentation layer using Flask or Django
